@@ -11,8 +11,8 @@ class PredictPipeline:
             ##this is for my personal pc 
             ##model_path='artifacts\model.pkl'
             ##this is for deployment on render
-            import os
-            model_path = os.path.join("artifacts", "model.pkl")
+            
+            model_path ="../artifacts/model.pkl"
  
             preprocessor_path='artifacts\preprocessor.pkl'
             model = load_object(file_path=model_path)
