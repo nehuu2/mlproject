@@ -1,4 +1,5 @@
 import sys
+import os
 import pandas as pd
 from src.exception import CustomException
 from src.utils import load_object
@@ -12,15 +13,23 @@ class PredictPipeline:
             ##model_path='artifacts\model.pkl'
             ##this is for deployment on render
             
-            model_path ="../artifacts/model.pkl"
- 
-            preprocessor_path='artifacts\preprocessor.pkl'
+            model_path = os.path.join("artifacts", "model.pkl")
+            preprocessor_path = os.path.join("artifacts", "preprocessor.pkl")
+            
+            print(f"Loading model from: {model_path}")
+            print(f"Loading preprocessor from: {preprocessor_path}")
+            
             model = load_object(file_path=model_path)
             preprocessor=load_object(file_path=preprocessor_path)
+            
+            print("Model and preprocessor loaded successfully")
+            print(f"Input features shape: {features.shape}")
+            
             data_scaled=preprocessor.transform(features)
             preds = model.predict(data_scaled)
             return preds
           except Exception as e:
+            print(f"Error in predict method: {str(e)}")
             raise CustomException(e,sys) 
 
 
