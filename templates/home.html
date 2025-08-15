@@ -104,9 +104,15 @@
             <input class="btn btn-primary" type="submit" value="Predict your Maths Score" required />
         </div>
     </form>
+    {% if results %}
     <h2>
-       THE  prediction is {{results}}
+       {% if results is string and results.startswith('Error') %}
+           {{results}}
+       {% else %}
+           The predicted Maths Score is: {{ "%.2f"|format(results) }}
+       {% endif %}
     </h2>
+    {% endif %}
    <body>
 </html>
 
